@@ -1,0 +1,28 @@
+#mapDiv{
+	  position: relative;
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width:80%;
+    }
+
+    #legDiv{
+      position: relative;
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width:20%;
+      float: right;
+  }
+
+html, body{
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width:100%;
+      }
+
+.esriControlsBR {
+	font-family: fantasy;
+	font-size: 1px;
+}
