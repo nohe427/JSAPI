@@ -26,6 +26,9 @@ var layer = new FeatureLayer("http://services.arcgis.com/Wl7Y1m92PbjtJs5n/arcgis
           legend.startup();
       });
 
+      map.on("zoom-end", function() {
+      	map.setBasemap(mapSelect());
+      })
 
 
 map.addLayers([layer]);
