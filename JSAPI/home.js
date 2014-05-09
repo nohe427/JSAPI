@@ -5,7 +5,7 @@ var legOpt = {
 	autoUpdate: true,
 	respectCurrentMapScale: true
 };
-require(["esri/map", "esri/dijit/Legend", "esri/layers/FeatureLayer", "dojo/domReady!"],
+require(["esri/map", "esri/dijit/Legend", "esri/layers/FeatureLayer", "dijit/layout/ContentPane", "dojo/domReady!"],
 function (Map, Legend, FeatureLayer) {
         map = new Map("mapDiv", {
             center: [-75.8, 38.45],
@@ -15,16 +15,20 @@ function (Map, Legend, FeatureLayer) {
 
 var layer = new FeatureLayer("http://services.arcgis.com/Wl7Y1m92PbjtJs5n/arcgis/rest/services/autoBody/FeatureServer/0",
 	{visible: true
+	,mode:FeatureLayer.MODE_ONDEMAND
+	,outFields:["*"]
 });
 
-var legend = new Legend({
-	map:map
-}, "legDiv");
-legend.startup;
+      map.on("layers-add-result", function () {
+          var legend = new Legend({
+            map: map
+          }, "legDiv");
+          legend.startup();
+      });
 
 
 
-map.addLayer(layer);
+map.addLayers([layer]);
 
 function mapSelect(){
 	num = Math.floor(Math.random() * mapOptions.length);
