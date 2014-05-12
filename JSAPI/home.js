@@ -1,12 +1,23 @@
 var map;
+var legend;
 var mapOptions = ["osm", "national-geographic", "gray", "satellite", "hybrid", "oceans", "streets", "topo"];
 var legOpt = {
 	map:map,
 	autoUpdate: true,
 	respectCurrentMapScale: true
 };
-require(["esri/map", "esri/dijit/Legend", "esri/layers/FeatureLayer", "dijit/layout/ContentPane", "dojo/domReady!"],
-function (Map, Legend, FeatureLayer) {
+    require([
+      "esri/map", "esri/layers/FeatureLayer", "esri/dijit/Legend",
+      "dojo/_base/array", "dojo/parser",
+      "dijit/layout/BorderContainer", "dijit/layout/ContentPane", 
+      "dijit/layout/AccordionContainer", "dojo/domReady!"
+    ], function(
+      Map, FeatureLayer, Legend,
+      arrayUtils, parser
+    ) {
+      
+      parser.parse();
+
         map = new Map("mapDiv", {
             center: [-75.8, 38.45],
             zoom: 9,
@@ -20,16 +31,17 @@ var layer = new FeatureLayer("http://services.arcgis.com/Wl7Y1m92PbjtJs5n/arcgis
 });
 
       map.on("layers-add-result", function () {
-          var legend = new Legend({
-            map: map
-          }, "legDiv");
+          legend = new Legend({
+	map:map,
+	autoUpdate: true,
+	respectCurrentMapScale: true
+}, "legDiv");
           legend.startup();
       });
 
       map.on("zoom-end", function() {
       	map.setBasemap(mapSelect());
-      })
-
+      });
 
 map.addLayers([layer]);
 

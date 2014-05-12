@@ -1,16 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>JS API</title>
-	<link rel="stylesheet" href="http://js.arcgis.com/3.9/js/dojo/dijit/themes/claro/claro.css">
-	<link rel="stylesheet" href="http://js.arcgis.com/3.9/js/esri/css/esri.css">
-	<script src="http://js.arcgis.com/3.9/"></script>
-	<script src="home.js"></script>
-	<link rel="stylesheet" type="text/css" href="home.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <!--The viewport meta tag is used to improve the presentation and behavior of the samples
+    on iOS devices-->
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+  <title>Map with legend</title>
+
+  <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/dojo/dijit/themes/claro/claro.css">
+  <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/esri/css/esri.css">
+  <script src="http://js.arcgis.com/3.9/"></script>
+    <link rel="stylesheet" href="home.css">
+  <script src="home.js"></script>
 </head>
-<body class = "claro">
+
+<body class="claro">
+<!--[if IE 7]>
+<style>
+  html, body {
+    margin: 0;
+  }
+</style>
+<![endif]-->
 <div id="content"
      data-dojo-type="dijit/layout/BorderContainer"
      data-dojo-props="design:'headline', gutters:true"
@@ -38,4 +49,5 @@
   </div>
 </div>
 </body>
+
 </html>

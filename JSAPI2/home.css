@@ -1,0 +1,13 @@
+    html, body {
+      height: 97%;
+      width: 98%;
+      margin: 1%;
+    }
+
+    #rightPane {
+      width: 20%;
+    }
+
+    #legendPane {
+      border: solid #97DCF2 1px;
+    }
