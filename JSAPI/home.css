@@ -1,28 +1,34 @@
-#mapDiv{
-    position: absolute;
-      padding: 0;
-      margin: 0;
-      height: 100%;
-      width:80%;
+html, body {
+      height: 97%;
+      width: 98%;
+      margin: 1%;
     }
 
-    #legDiv{
-      position: relative;
-      padding: 0;
-      margin: 0;
-      height: 100%;
-      width:20%;
-      float: right;
-  }
+    #rightPane {
+      width: 20%;
+    }
 
-html, body{
-      padding: 0;
-      margin: 0;
-      height: 100%;
-      width:100%;
+    #legendPane {
+      border: solid #97DCF2 1px;
+    }
+
+
+          .esriPopup.myTheme .titlePane,
+      .dj_ie7 .esriPopup.myTheme .titlePane .title {
+        background-color: #899752;
+        color: #333333;
+        font-weight: bold;
+      }
+      .esriPopup.myTheme .titlePane {
+        border-bottom: 1px solid #121310;
+      }
+      .esriPopup.myTheme a {
+        color: #d6e68a;
       }
 
-.esriControlsBR {
-  font-family: fantasy;
-  font-size: 1px;
-}
+      .esriPopup.myTheme .contentPane,
+      .esriPopup.myTheme .actionsPane {
+        border-color: 1px solid #121310;
+        background-color: #424242;
+        color:#ffffff;
+     }
