@@ -2,76 +2,91 @@ var map;
 var legend;
 var layer;
 var mapOptions = ["osm", "national-geographic", "gray", "satellite", "hybrid", "oceans", "streets", "topo"];
-var legOpt = {
-  map:map,
-  autoUpdate: true,
-  respectCurrentMapScale: true
-};
-    require([
-      "esri/map", "esri/InfoTemplate",
-      "esri/layers/FeatureLayer",
-      "dojo/dom-class", "dojo/dom-construct",
-      "dojo/on", "esri/dijit/Legend",
-      "dojo/_base/array", "dojo/parser",
-      "dijit/layout/BorderContainer", "dijit/layout/ContentPane", 
-      "dijit/layout/AccordionContainer", "dojo/domReady!"
-    ], function(
-      Map, InfoTemplate,
-      FeatureLayer,
-      domClass, domConstruct,
-      on, Legend,
-      arrayUtils, parser
-    ) {
-      
-      parser.parse();
 
-        map = new Map("mapDiv", {
-            center: [-75.8, 38.45],
-            zoom: 9,
-            basemap: "gray"
-        });
+require([
+    "esri/map",
+    "esri/InfoTemplate",
+    "esri/layers/FeatureLayer",
+    "dojo/dom-class",
+    "dojo/dom-construct",
+    "dojo/on",
+    "esri/dijit/Legend",
+    "esri/dijit/OverviewMap",
+    "dojo/_base/array",
+    "dojo/parser",
+    "dijit/layout/BorderContainer",
+    "dijit/layout/ContentPane",
+    "dijit/layout/AccordionContainer",
+    "dojo/domReady!"
+], function (
+    Map,
+    InfoTemplate,
+    FeatureLayer,
+    domClass,
+    domConstruct,
+    on,
+    Legend,
+    OverviewMap,
+    arrayUtils,
+    parser
+) {
 
-var infoTemplate = new InfoTemplate();
-infoTemplate.setTitle("NEAR_FID field value: ${NEAR_FID}");
-infoTemplate.setContent("<b>Color</b>: ${color} <br>" +
-            "<b>Name:</b> ${name}");
+    parser.parse();
 
-        domClass.add(map.infoWindow.domNode, "myTheme");
+    map = new Map("mapDiv", {
+        center: [-75.8, 38.45],
+        zoom: 9,
+        basemap: "gray"
+    });
 
-layer = new FeatureLayer("http://services.arcgis.com/Wl7Y1m92PbjtJs5n/arcgis/rest/services/autoBody/FeatureServer/0",
-  {visible: true
-  ,mode:FeatureLayer.MODE_ONDEMAND
-  ,outFields:["*"],
-  infoTemplate: infoTemplate
-});
+    var infoTemplate = new InfoTemplate();
+    infoTemplate.setTitle("autoBody layer information");
+    infoTemplate.setContent("${*}");
 
-      map.on("layers-add-result", function () {
-          legend = new Legend({
-  map:map,
-  autoUpdate: true,
-  respectCurrentMapScale: true
-}, "legDiv");
-          legend.startup();
-      });
+    domClass.add(map.infoWindow.domNode, "myTheme");
 
-      map.on("zoom-end", function() {
+    layer = new FeatureLayer("http://services.arcgis.com/Wl7Y1m92PbjtJs5n/arcgis/rest/services/autoBody/FeatureServer/0", {
+        visible: true,
+        mode: FeatureLayer.MODE_ONDEMAND,
+        outFields: ["*"],
+        infoTemplate: infoTemplate
+    });
+
+    map.on("layers-add-result", function () {
+        legend = new Legend({
+            map: map,
+            autoUpdate: true,
+            respectCurrentMapScale: true
+        }, "legDiv");
+        legend.startup();
+        omap.show();
+    });
+
+    map.on("zoom-end", function () {
         map.setBasemap(mapSelect());
-      });
+    });
 
-map.addLayers([layer]);
+omap = new OverviewMap({
+  attachTo: "bottom-left",
+  map:map
+})
+omap.startup();
 
-function mapSelect(){
-  num = Math.floor(Math.random() * mapOptions.length);
-  console.log(num)
-  basemap = mapOptions[num];
-  console.log(basemap)
-  return basemap;
-};
 
-function loopLayers(){
-  for(var i=0;i<layer.fields.length;i++){
-    console.log(layer.fields[i].name);
-  }
-};
+    map.addLayers([layer]);
+
+    function mapSelect() {
+        num = Math.floor(Math.random() * mapOptions.length);
+        console.log(num)
+        basemap = mapOptions[num];
+        console.log(basemap)
+        return basemap;
+    };
+
+    function loopLayers() {
+        for (var i = 0; i < layer.fields.length; i++) {
+            console.log(layer.fields[i].name);
+        }
+    };
 
 });
